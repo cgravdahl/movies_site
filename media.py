@@ -1,6 +1,5 @@
 class Media():
-  def __init__(self,media_id,title,storyline,image_url):
-    self.media_id = media_id
+  def __init__(self,title,storyline,image_url):
     self.title = title
     self.storyline = storyline
     self.image_url = image_url

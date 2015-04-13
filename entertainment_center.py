@@ -3,15 +3,16 @@ import fresh_tomatoes
 import tmdbsimple as tmdb
 import omdb
 import re
-import requests
+from datetime import datetime
 
 
+current_date = str(datetime.now())
 tmdb.API_KEY = "27591dafb389ecb4d7c7bb206fbfe833"
 movie_6 = []
 top_6 = tmdb.Discover()
 movie_list = []
 trailer_list = {}
-response = top_6.movie(page = 1, sort_by = "popularity.desc", year = 2015)
+response = top_6.movie(page = 1, sort_by = "popularity.desc", year=2015)
 
 
 

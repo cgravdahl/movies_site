@@ -1,6 +1,5 @@
 import webbrowser
 import os
-import re
 
 # Styles and scripting for the page
 main_page_head = '''
@@ -11,6 +10,7 @@ main_page_head = '''
     <!-- Bootstrap 3 -->
     <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="css/main.css">
     <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
     <script src="https://netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
     <style type="text/css" media="screen">
@@ -21,37 +21,6 @@ main_page_head = '''
             margin-top: 200px;
             width: 640px;
             height: 480px;
-        }
-        .hanging-close {
-            position: absolute;
-            top: -12px;
-            right: -12px;
-            z-index: 9001;
-        }
-        #trailer-video {
-            width: 100%;
-            height: 100%;
-        }
-        .movie-tile {
-            margin-bottom: 20px;
-            padding-top: 20px;
-        }
-        .movie-tile:hover {
-            background-color: #EEE;
-            cursor: pointer;
-        }
-        .scale-media {
-            padding-bottom: 56.25%;
-            position: relative;
-        }
-        .scale-media iframe {
-            border: none;
-            height: 100%;
-            position: absolute;
-            width: 100%;
-            left: 0;
-            top: 0;
-            background-color: white;
         }
     </style>
     <script type="text/javascript" charset="utf-8">
@@ -68,15 +37,9 @@ main_page_head = '''
             $.ajax({
                    method: "GET",
                    url: 'http://trailersapi.com/trailers.json?movie='+trailerImdbId+'',
-                   success: sourceUrl = data.code
                    })
-            $("#trailer-video-container").empty().append($("<iframe></iframe>", {
-              'id': 'trailer-video',
-              'type': 'text-html',
-              'src': sourceUrl,
-              'frameborder': 0
-            }));
-        });
+                  .done(function(data){$("#trailer-video-container").empty().append($(data[0].code))})
+            });
         // Animate in the movies when the page loads
         $(document).ready(function () {
           $('.movie-tile').hide().first().show("fast", function showNext() {
@@ -129,10 +92,10 @@ movie_tile_content = '''
     <h2>{movie_title}</h2>
 </div>
 '''
-
 def create_movie_tiles_content(movies):
     # The HTML content for this section of the page
     content = ''
+
     for movie in movies:
         # Extract the youtube ID from the url
         # youtube_id_match = re.search(r'(?<=v=)[^&#]+', movie.trailer_youtube_url)
@@ -141,11 +104,11 @@ def create_movie_tiles_content(movies):
 
         # Append the tile for the movie with its content filled in
 
-        content += movie_tile_content.format(
-            movie_title=movie.title,
-            poster_image_url= movie.image_url,
-            trailer_imdb_id=movie.imdb_id
-        )
+      content += movie_tile_content.format(
+          movie_title=movie.title,
+          poster_image_url= movie.image_url,
+          trailer_imdb_id=movie.imdb_id
+      )
     return content
 
 def open_movies_page(movies):

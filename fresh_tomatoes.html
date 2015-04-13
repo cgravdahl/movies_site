@@ -58,14 +58,15 @@
         });
         // Start playing the video whenever the trailer modal is opened
         $(document).on('click', '.movie-tile', function (event) {
-            var trailerYouTubeId = $(this).attr('data-trailer-youtube-id')
-            var sourceUrl = 'http://www.youtube.com/embed/' + trailerYouTubeId + '?autoplay=1&html5=1';
-            $("#trailer-video-container").empty().append($("<iframe></iframe>", {
-              'id': 'trailer-video',
-              'type': 'text-html',
-              'src': sourceUrl,
-              'frameborder': 0
-            }));
+            var sourceUrl;
+            var trailerImdbId = $(this).attr('data-trailer-imdb-id');
+            $.ajax({
+                   method: "GET",
+                   url: 'http://trailersapi.com/trailers.json?movie='+trailerImdbId+'',
+                   data:{format : 'json'},
+               })
+                   .done(function(data){console.log(data[0].code);$("#trailer-video-container").empty().append($(data[0].code))})
+
         });
         // Animate in the movies when the page loads
         $(document).ready(function () {
@@ -103,33 +104,33 @@
       </div>
     </div>
     <div class="container">
-      
-<div class="col-md-6 col-lg-4 movie-tile text-center" data-trailer-youtube-id="[u'tt2820852']" data-toggle="modal" data-target="#trailer">
+
+<div class="col-md-6 col-lg-4 movie-tile text-center" data-trailer-imdb-id="Furious 7" data-toggle="modal" data-target="#trailer">
     <img src="http://ia.media-imdb.com/images/M/MV5BMTQxOTA2NDUzOV5BMl5BanBnXkFtZTgwNzY2MTMxMzE@._V1_SX300.jpg" width="220" height="342">
     <h2>Furious 7</h2>
 </div>
 
-<div class="col-md-6 col-lg-4 movie-tile text-center" data-trailer-youtube-id="[u'tt2446042']" data-toggle="modal" data-target="#trailer">
-    <img src="http://ia.media-imdb.com/images/M/MV5BNjM5MDU3NTY0M15BMl5BanBnXkFtZTgwOTk2ODU2MzE@._V1_SX300.jpg" width="220" height="342">
-    <h2>Taken 3</h2>
-</div>
-
-<div class="col-md-6 col-lg-4 movie-tile text-center" data-trailer-youtube-id="[u'tt2245084']" data-toggle="modal" data-target="#trailer">
-    <img src="http://ia.media-imdb.com/images/M/MV5BMjI4MTIzODU2NV5BMl5BanBnXkFtZTgwMjE0NDAwMjE@._V1_SX300.jpg" width="220" height="342">
-    <h2>Big Hero 6</h2>
-</div>
-
-<div class="col-md-6 col-lg-4 movie-tile text-center" data-trailer-youtube-id="[u'tt2310332']" data-toggle="modal" data-target="#trailer">
+<div class="col-md-6 col-lg-4 movie-tile text-center" data-trailer-imdb-id="The Hobbit: The Battle of the Five Armies" data-toggle="modal" data-target="#trailer">
     <img src="http://ia.media-imdb.com/images/M/MV5BODAzMDgxMDc1MF5BMl5BanBnXkFtZTgwMTI0OTAzMjE@._V1_SX300.jpg" width="220" height="342">
     <h2>The Hobbit: The Battle of the Five Armies</h2>
 </div>
 
-<div class="col-md-6 col-lg-4 movie-tile text-center" data-trailer-youtube-id="[u'tt2084970']" data-toggle="modal" data-target="#trailer">
-    <img src="http://ia.media-imdb.com/images/M/MV5BNDkwNTEyMzkzNl5BMl5BanBnXkFtZTgwNTAwNzk3MjE@._V1_SX300.jpg" width="220" height="342">
-    <h2>The Imitation Game</h2>
+<div class="col-md-6 col-lg-4 movie-tile text-center" data-trailer-imdb-id="Taken 3" data-toggle="modal" data-target="#trailer">
+    <img src="http://ia.media-imdb.com/images/M/MV5BNjM5MDU3NTY0M15BMl5BanBnXkFtZTgwOTk2ODU2MzE@._V1_SX300.jpg" width="220" height="342">
+    <h2>Taken 3</h2>
 </div>
 
-<div class="col-md-6 col-lg-4 movie-tile text-center" data-trailer-youtube-id="[u'tt1823672']" data-toggle="modal" data-target="#trailer">
+<div class="col-md-6 col-lg-4 movie-tile text-center" data-trailer-imdb-id="Big Hero 6" data-toggle="modal" data-target="#trailer">
+    <img src="http://ia.media-imdb.com/images/M/MV5BMjI4MTIzODU2NV5BMl5BanBnXkFtZTgwMjE0NDAwMjE@._V1_SX300.jpg" width="220" height="342">
+    <h2>Big Hero 6</h2>
+</div>
+
+<div class="col-md-6 col-lg-4 movie-tile text-center" data-trailer-imdb-id="Exodus: Gods and Kings" data-toggle="modal" data-target="#trailer">
+    <img src="http://ia.media-imdb.com/images/M/MV5BMjI3MDY0NjkxNl5BMl5BanBnXkFtZTgwNTM3NTA0MzE@._V1_SX300.jpg" width="220" height="342">
+    <h2>Exodus: Gods and Kings</h2>
+</div>
+
+<div class="col-md-6 col-lg-4 movie-tile text-center" data-trailer-imdb-id="Chappie" data-toggle="modal" data-target="#trailer">
     <img src="http://ia.media-imdb.com/images/M/MV5BMTUyNTI4NTIwNl5BMl5BanBnXkFtZTgwMjQ4MTI0NDE@._V1_SX300.jpg" width="220" height="342">
     <h2>Chappie</h2>
 </div>

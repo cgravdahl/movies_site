@@ -1,1 +1,1 @@
-web: python entertainment_center.py $PATH
+web: python entertainment_center.py

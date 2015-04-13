@@ -33,5 +33,5 @@ for m in movie_list:
   poster_image_url = re.sub(r'(^\[)\w|(\])+g',"",url_clean)
   movie_6.append(movies.Movie(m,[movie_info["plot"]],poster_image_url,imdb_id))
 
-print(imdb_id)
+
 fresh_tomatoes.open_movies_page(movie_6)

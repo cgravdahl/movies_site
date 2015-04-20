@@ -1,5 +1,11 @@
 import webbrowser
 import os
+import web
+
+
+
+
+
 
 # Styles and scripting for the page
 main_page_head = '''
@@ -124,4 +130,5 @@ def open_movies_page(movies):
 
   # open the output file in the browser
   url = os.path.abspath(output_file.name)
+
   webbrowser.open('file://' + url, new=2) # open in a new tab, if possible

@@ -11,10 +11,9 @@ from datetime import datetime
 def index():
   current_date = str(datetime.now())
   tmdb.API_KEY = "27591dafb389ecb4d7c7bb206fbfe833"
-  movie_6 = []
+  movie_6 = {}
   top_6 = tmdb.Discover()
   movie_list = []
-  trailer_list = {}
   response = top_6.movie(page = 1, sort_by = "popularity.desc", year=2015)
 
 
@@ -34,6 +33,6 @@ def index():
     imdb_id = re.sub(r'tt',"",imdb_clean)
     # trailers = requests.get('http://api.traileraddict.com/?imdb='+imdb_id+'&count=1&width=680')
     poster_image_url = re.sub(r'(^\[)\w|(\])+g',"",url_clean)
-    movie_6.append(movies.Movie(m,[movie_info["plot"]],poster_image_url,imdb_id))
+    movie_6.update({m:movies.Movie(m,[movie_info["plot"]],poster_image_url,imdb_id)})
   return render_template('index.html',
-                         movie_tiles = movie_6[1].title)
+                         movie_tiles = movie_6)

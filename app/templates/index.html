@@ -70,7 +70,9 @@
       </div>
     </div>
     <div class="container">
-     <p> {{ movie_tiles }} <p>
+    {% for m in movie_tiles %}
+     <p> {{ movie_tiles[m].title }} <p>
+    {% endfor %}
     </div>
   </body>
 </html>

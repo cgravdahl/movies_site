@@ -31,7 +31,7 @@
             var trailerImdbId = $(this).attr('data-trailer-imdb-id');
             $.ajax({
                    method: "GET",
-                   url: 'https://trailersapi.com/trailers.json?movie='+trailerImdbId+'',
+                   url: 'http://trailersapi.com/trailers.json?movie='+trailerImdbId+'',
                    })
                   .done(function(data){$("#trailer-video-container").empty().append($(data[0].code))})
             });

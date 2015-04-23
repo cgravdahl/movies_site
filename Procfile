@@ -1,1 +1,1 @@
-web: python entertainment_center.py
+web: __init__.py

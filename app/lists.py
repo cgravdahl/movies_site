@@ -2,10 +2,11 @@ import movies
 import tmdbsimple as tmdb
 import omdb
 import re
+import config
 from datetime import datetime
 
 current_date = str(datetime.now())
-tmdb.API_KEY = "27591dafb389ecb4d7c7bb206fbfe833"
+tmdb.API_KEY = config.tmdb_key
 movie_6 = []
 top_6 = tmdb.Discover()
 movie_list = []
